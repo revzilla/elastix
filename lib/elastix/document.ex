@@ -13,7 +13,8 @@ defmodule Elastix.Document do
       |> Enum.map(fn d -> bulk_document(index_name, type_name, d) end)
       |> Enum.join("\n")
 
-    elastic_url <> make_path(index_name, type_name, "_bulk", []) 
+    json = json <> "\n"
+    elastic_url <> make_path(index_name, type_name, "_bulk", [])
     |> HTTP.put(json)
     |> process_response
   end
