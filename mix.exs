@@ -35,7 +35,7 @@ defmodule Elastix.Mixfile do
     [{:earmark, "~> 0.1", only: :dev},
      {:ex_doc, "~> 0.7", only: :dev},
      {:poison, "~> 2.1"},
-     {:httpoison, "~> 0.12"}]
+     {:httpoison, "~> 1.1.1"}]
   end
 
   defp package do
