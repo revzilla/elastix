@@ -10,8 +10,8 @@ defmodule Elastix.Search do
 
   @doc false
   def search(elastic_url, index, types, data, query_params) do
-    elastic_url <> make_path(index, types, query_params)
-    |> HTTP.post(Poison.encode!(data))
+    (elastic_url <> make_path(index, types, query_params))
+    |> HTTP.post(Jason.encode!(data))
     |> process_response
   end
 
@@ -19,10 +19,11 @@ defmodule Elastix.Search do
   def make_path(index, types, query_params) do
     path_root = "/#{index}"
 
-    path = case types do
-      [] -> path_root
-      _ -> path_root <> "/" <> Enum.join types, ","
-    end
+    path =
+      case types do
+        [] -> path_root
+        _ -> path_root <> "/" <> Enum.join(types, ",")
+      end
 
     path = "#{path}/_search"
 
@@ -34,9 +35,10 @@ defmodule Elastix.Search do
 
   @doc false
   defp add_query_params(path, query_params) do
-    query_string = Enum.map_join query_params, "&", fn(param) ->
-      "#{elem(param, 0)}=#{elem(param, 1)}"
-    end
+    query_string =
+      Enum.map_join(query_params, "&", fn param ->
+        "#{elem(param, 0)}=#{elem(param, 1)}"
+      end)
 
     "#{path}?#{query_string}"
   end
