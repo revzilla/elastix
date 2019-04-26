@@ -38,7 +38,6 @@ defmodule Elastix.Mixfile do
       {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.7", only: :dev},
       {:jason, "~> 1.1"},
-      {:hackney, "~> 1.12.1", override: true},
       {:httpoison, "~> 1.1.1"}
     ]
   end
