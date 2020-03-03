@@ -3,24 +3,24 @@ defmodule Elastix.Mixfile do
 
   @version "0.1.1"
 
-  def project do
+  def project() do
     [
       app: :elastix,
       version: @version,
       elixir: "~> 1.0",
       description: "A simple Elastic REST client written in Elixir.",
-      package: package,
+      package: package(),
       docs: [source_ref: "v#{@version}", main: "overview"],
       build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      deps: deps
+      deps: deps()
     ]
   end
 
   # Configuration for the OTP application
   #
   # Type `mix help compile.app` for more information
-  def application do
+  def application() do
     [applications: [:logger, :httpoison]]
   end
 
@@ -42,7 +42,7 @@ defmodule Elastix.Mixfile do
     ]
   end
 
-  defp package do
+  defp package() do
     [
       files: ["lib", "mix.exs", "README.md"],
       maintainers: ["El Werbitzky"],
